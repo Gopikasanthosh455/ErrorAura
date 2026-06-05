@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ErrorAura — AI Debug Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="6"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg>
+      </div>
+      <span class="app-name">ErrorAura</span>
+    </div>
+    <div class="session-badge">
+      <div class="live-dot"></div>
+      <span id="session-label">0 bugs analyzed</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+
+
+    <!-- INPUT -->
+    <section class="input-section">
+      <div class="section-label">Paste your code and error message</div>
+      <div class="input-wrap">
+        <textarea id="code-input"
+          placeholder="Paste your broken code and the error message here..."
+          oninput="detectLang(this.value); autoResize(this)"
+        ></textarea>
+        <div class="lang-tag" id="lang-tag">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span id="lang-name">Auto</span>
+        </div>
+      </div>
+      <button class="analyze-btn" id="analyze-btn" onclick="analyze()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Analyze my error
+      </button>
+    </section>
+
+    <!-- OUTPUT -->
+    <section id="output"></section>
+
+    <!-- TRACKER -->
+    <section class="panel tracker-panel">
+      <div class="panel-head amber">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Your repeated mistake patterns
+      </div>
+      <div class="tracker-box" id="tracker-box">
+        <div class="empty-tracker">No patterns yet — analyze your first bug above</div>
+      </div>
+      <button class="clear-btn" id="clear-btn" onclick="clearPatterns()" style="display:none">Clear history</button>
+    </section>
+
+  </main>
+
+  <script src="config.js"></script>
+  <script src="tracker.js"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
